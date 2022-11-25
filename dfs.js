@@ -90,6 +90,7 @@ depthFirstValues(null);
 //    -> []
 */
 
+
 class Node {
   constructor(val) {
     this.val = val;
@@ -97,20 +98,33 @@ class Node {
     this.right = null;
   }
 }
-
-const depthFirstValues = (root) => {
-    // todo 
-     if(root === null) return []
-     let tempStack = [root];
-     let finalResult = [];
+/*
+    iterative version
+*/
+// const depthFirstValues = (root) => {
+//     // todo 
+//      if(root === null) return []
+//      let tempStack = [root];
+//      let finalResult = [];
      
-     while(tempStack.length > 0){
-         let current  = tempStack.pop()
-          finalResult.push(current.val)
-          if(current.right) tempStack.push(current.right)
-          if(current.left)  tempStack.push(current.left)
-        }
-       return finalResult;
-  };
+//      while(tempStack.length > 0){
+//          let current  = tempStack.pop()
+//           finalResult.push(current.val)
+//           if(current.right) tempStack.push(current.right)
+//           if(current.left)  tempStack.push(current.left)
+//         }
+//        return finalResult;
+//   };
   
+  /*
+   recursive version
+  */
+
+   const depthFirstValues = (root) => {
+      if(root = null) return []
+      let leftArrayVal =  depthFirstValues(root.left)
+      let rightArrayVal =  depthFirstValues(root.right)
+      return [root,...leftArrayVal,...rightArrayVal]
+
+   }
   
