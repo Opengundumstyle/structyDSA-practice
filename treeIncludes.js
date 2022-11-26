@@ -151,18 +151,26 @@ treeIncludes(null, "b"); // -> false
 //   };
 
 // dfs approach - iterative
+// const treeIncludes = (root, target) => {
+//     // todo
+//     if(root === null) return false
+//     let stack = [root]
+//     while(stack.length > 0){
+//         let current = stack.pop()
+//         if(current.val === target) return true
+//         if(current.left) stack.push(current.left)
+//         if(current.right) stack.push(current.right)
+//     }
+//     return false
+//   };
+
+// dfs approach - recursive
+
 const treeIncludes = (root, target) => {
     // todo
     if(root === null) return false
-    let stack = [root]
-    while(stack.length > 0){
-        let current = stack.pop()
-        if(current.val === target) return true
-        if(current.left) stack.push(current.left)
-        if(current.right) stack.push(current.right)
-    }
-    return false
+    if(root.val === target) return true
+    return (treeIncludes(root.left,target) || treeIncludes(root.right,target))
   };
-
 
   
