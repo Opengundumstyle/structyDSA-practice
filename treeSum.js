@@ -64,16 +64,25 @@ treeSum(null); // -> 0
 //   }
 // }
 
+// const treeSum = (root) => {
+//     // todo
+//     if (root === null) return 0
+//     let sum = 0;
+//     let queue = [root]
+//      while(queue.length > 0){
+//         let current = queue.shift();
+//         sum += current.val
+//         if(current.left) queue.push(current.left);
+//         if(current.right) queue.push(current.right);
+//      }
+//      return sum
+//   };
+
+// recursive solution
 const treeSum = (root) => {
     // todo
-    if (root === null) return 0
-    let sum = 0;
-    let queue = [root]
-     while(queue.length > 0){
-        let current = queue.shift();
-        sum += current.val
-        if(current.left) queue.push(current.left);
-        if(current.right) queue.push(current.right);
-     }
-     return sum
-  };
+    if(root === null) return 0
+    let leftValues = treeSum(root.left)
+    let rightValues = treeSum(root.right)
+    return root.val + leftValues + rightValues
+};
