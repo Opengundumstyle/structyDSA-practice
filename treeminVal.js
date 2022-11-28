@@ -92,21 +92,26 @@ treeMinValue(a); // -> 42
 //   }
 // }
 
+// bfs
+// const treeMinValue = (root) => {
+//     // todo
+//      let minVal = root.val;
+//      let queue = [root]
+//      while(queue.length >0){
+//         let current = queue.shift();
+//          if(minVal > current.val ) minVal = current.val
+//          if(current.left) queue.push(current.left)
+//          if(current.right) queue.push(current.right)
+//      }
+//         return minVal
+//   };
+  
+// dfs recursive
+
 const treeMinValue = (root) => {
-    // todo
-     let minVal = root.val;
-     let queue = [root]
-     while(queue.length >0){
-        let current = queue.shift();
-         if(minVal > current.val ) minVal = current.val
-         if(current.left) queue.push(current.left)
-         if(current.right) queue.push(current.right)
-     }
-        return minVal
+    if (root === null) return Infinity;
+    const smallestLeftValue = treeMinValue(root.left);
+    const smallestRightValue = treeMinValue(root.right);
+    return Math.min(root.val, smallestLeftValue, smallestRightValue);
   };
-  
-  module.exports = {
-    treeMinValue,
-  };
-  
-  
+
