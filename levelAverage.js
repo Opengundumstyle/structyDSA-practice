@@ -116,32 +116,59 @@ levelAverages(null); // -> [ ]
 //   }
 // }
 
+// dfs iterative
+
+// const levelAverages = (root) => {
+//     // todo
+//      if(root === null) return []
+//       let stack = [{node:root,level:0}]
+//       let result = []
+//       while(stack.length > 0){
+//            let {node,level} = stack.pop()
+//            if(result.length === level){
+//                result.push([node.val,0])
+               
+//            }else{
+//                result[level][0] += node.val
+//            } 
+//            result[level][1] += 1
+          
+//        if(node.right) stack.push({node:node.right, level:level+1})
+//        if(node.left) stack.push({node:node.left, level:level+1})
+//       }
+    
+//      for(let i = 0 ; i < result.length ; i++){
+//             let subPath = result[i]
+//             result[i] = subPath[0] / subPath[1]
+//      }
+    
+//       return result
+        
+//   };
+  
+// dfs recursive
 const levelAverages = (root) => {
     // todo
-     if(root === null) return []
-      let stack = [{node:root,level:0}]
-      let result = []
-      while(stack.length > 0){
-           let {node,level} = stack.pop()
-           if(result.length === level){
-               result.push([node.val,0])
-               
-           }else{
-               result[level][0] += node.val
-           } 
-           result[level][1] += 1
-          
-       if(node.right) stack.push({node:node.right, level:level+1})
-       if(node.left) stack.push({node:node.left, level:level+1})
-      }
-    
-     for(let i = 0 ; i < result.length ; i++){
-            let subPath = result[i]
-            result[i] = subPath[0] / subPath[1]
-     }
-    
-      return result
-        
+        let result  = []
+        levelAveragesHelper(root,result,0)
+        for(let i = 0 ; i < result.length ; i++){
+          let subPath = result[i]
+          result[i] = subPath[0] / subPath[1]
+           }
+        return result
   };
   
   
+  const levelAveragesHelper = (node,result,levelNums)=>{
+         if(node === null) return;
+         if(result.length === levelNums){
+               result.push([node.val,0])
+               
+           }else{
+               result[levelNums][0] += node.val
+           } 
+           result[levelNums][1] += 1
+    
+        levelAveragesHelper(node.left,result,levelNums+1)
+        levelAveragesHelper(node.right,result,levelNums+1)
+  }
