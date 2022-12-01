@@ -103,3 +103,60 @@ test_03:
 treeLevels(null); // -> []
 */
 
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
+
+// dfs iterative solution
+// const treeLevels = (root) => {
+//     // todo
+//       if(root === null) return []
+//       let stack = [{"root":root,"level":0}]
+//       let finalArr = []
+    
+//       while(stack.length > 0){
+//           let current = stack.pop();
+//           let currentLevel = current["level"]
+//           if(finalArr.length < currentLevel+1){
+//               finalArr.push([current["root"].val])
+//           }else{
+//               finalArr[currentLevel].push(current["root"].val)
+//           }
+//          let right = current["root"].right
+//          let left = current["root"].left
+        
+//           if(right) {
+//                stack.push({"root":right,"level":currentLevel + 1 })
+//           }
+//           if(left){
+//               stack.push({"root":left,"level":currentLevel + 1 })
+//           }
+//         }
+//      return finalArr
+//   };
+
+// dfs recursive
+const treeLevels = (root) => {
+    // todo
+    const levels = [];
+    fillLevels(root,levels,0)
+    return levels;
+  };
+  
+  const fillLevels = (root,levels,levelNum) => {
+       if(root === null) return;
+       if(levels.length === levelNum){
+           levels.push([root.val])
+       }else{
+           levels[levelNum].push(root.val)
+       }
+       fillLevels(root.left,levels,levelNum + 1);
+       fillLevels(root.right,levels,levelNum + 1)
+  }
+
+  
+  
