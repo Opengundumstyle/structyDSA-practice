@@ -48,7 +48,7 @@ const _minChange = (amount, coins,memo = {}) => {
   if(amount === 0) return 0; 
   let minCoins = Infinity;
   for(let coin of coins){
-     const numCoins = 1 + minChange(amount - coin,coins,memo) 
+     const numCoins = 1 + _minChange(amount - coin,coins,memo) 
      if(numCoins < minCoins){
         minCoins = numCoins
      }
