@@ -1,12 +1,23 @@
+// dfs iterative
+// const depthFirstPrint = (graph,source) =>{
+//      const stack = [source];
+//      while(stack.length > 0){
+//         const current = stack.pop()
+//         console.log(current)
+//         for(let neighbor of graph[current]){
+//                  stack.push(neighbor)
+                 
+//         }
+//      }
+// }
+
+// dfs recursive
 const depthFirstPrint = (graph,source) =>{
-     const stack = [source];
-     while(stack.length > 0){
-        const current = stack.pop()
-        for(let neighbor of graph[current]){
-                 stack.push(neighbor)
+        console.log(source)
+        for(let neighbor of graph[source]){
+               depthFirstPrint(graph,neighbor)
         }
-     }
-}
+    }
 
 const graph ={
     a:['b','c'],
@@ -18,3 +29,6 @@ const graph ={
 }
 
 depthFirstPrint(graph,'a')
+
+// dfs recursive
+
