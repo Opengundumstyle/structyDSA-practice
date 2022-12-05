@@ -104,7 +104,7 @@ const grid = [
 countPaths(grid); // -> 3190434
 */
 
-const countPaths = (grid，r=0,c=0,memo = {}) => {
+const countPaths = (grid,r=0,c=0,memo = {}) => {
     // todo
       const pos = r + ',' + c;
       if(r === grid.length||c === grid[0].length ||grid[r][c] === 'X') return 0;
