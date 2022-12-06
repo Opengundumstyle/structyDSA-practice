@@ -84,20 +84,31 @@ hasPath(graph, 'v', 'z'); // false
   
   // dfs recursive 
   
-
-  // bfs iterative
   const hasPath = (graph, src, dst) => {
     // todo
-    let queue = [src]
-    while(queue.length > 0){
-        let current  = queue.shift()
-        
-        for(let neighbor of graph[current]){
-            if(neighbor === dst ){
-                 return true
-            }
-            queue.push(neighbor)
-        }
-    }
-    return false
+     if(src === dst) return true; 
+     
+     for(let neighbor of graph[src]){
+       if(hasPath(graph,neighbor,dst) === true){
+            return true;
+       }
+     }
+    return false;
   };
+  
+  // bfs iterative
+//   const hasPath = (graph, src, dst) => {
+//     // todo
+//     let queue = [src]
+//     while(queue.length > 0){
+//         let current  = queue.shift()
+        
+//         for(let neighbor of graph[current]){
+//             if(neighbor === dst ){
+//                  return true
+//             }
+//             queue.push(neighbor)
+//         }
+//     }
+//     return false
+//   };
