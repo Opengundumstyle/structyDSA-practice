@@ -55,7 +55,23 @@ connectedComponentsCount({
 
 const connectedComponentsCount = (graph) => {
     // todo
-     
+         let visited = new Set()
+         let count = 0;
+         for(let node in graph){
+               if(exploreParts(graph,node,visited) === true){
+                  count += 1
+               }
+         }
+         return count;
   };
+  
+  const exploreParts = (graph,node,visited) =>{
+        if(visited.has(String(node))) return false
+        visited.add(String(node))
+        for(let neighbor of graph[node]){
+              exploreParts(graph,neighbor,visited)
+        }
+        return true
+  }
   
  
