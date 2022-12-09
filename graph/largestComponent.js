@@ -50,3 +50,26 @@ largestComponent({
   8: []
 }); // -> 3
 */
+
+const largestComponent = (graph) => {
+  // todo
+   let visited = new Set();
+   let largestSize = 0;
+   for(let node in graph){
+     let currentSize = tracePath(graph,node,visited)
+       if (currentSize > largestSize) largestSize = currentSize
+   }
+   return largestSize
+};
+
+const tracePath = (graph,node,visited) =>{
+       if(visited.has(node)) return 0
+       visited.add(node)
+       let count = 1;
+  
+       for(let neighbor of graph[node]){
+          count += tracePath(graph,neighbor,visited)
+       }
+      
+        return count
+}
