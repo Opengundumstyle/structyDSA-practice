@@ -44,3 +44,37 @@ test_03:
 islandCount(grid); // -> 0
 */
 
+const islandCount = (grid) => {
+    // todo
+     let count = 0;
+     let visited = new Set();
+    
+     for(let i = 0 ; i < grid.length;i++){
+         for(let j = 0; j < grid[0].length; j++){
+               
+               if(isIsland(i,j,grid,visited) === true){
+                       count += 1
+               }
+         }
+     }
+      return count
+      
+  };
+  
+  const isIsland =(i,j,grid,visited)=>{
+       
+         let pos = i +','+j
+         const rowbound = 0 <= i && i < grid.length;
+         const colbound = 0 <= j && j < grid[0].length;
+         if(!rowbound || !colbound) return false;
+        
+         if(visited.has(pos)) return false
+         if(grid[i][j] === 'W') return false
+         visited.add(pos)
+         isIsland(i+1,j,grid,visited)
+         isIsland(i,j+1,grid,visited)
+         isIsland(i-1,j,grid,visited)
+         isIsland(i,j-1,grid,visited)
+         
+         return true
+  }
