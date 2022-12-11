@@ -46,3 +46,38 @@ const grid = [
 
 minimumIsland(grid); // -> 1
 */
+
+const minimumIsland = (grid) => {
+    // todo
+     let minSize = Infinity;
+     let visited = new Set()
+     for(let i  = 0 ; i < grid.length; i += 1){
+        for(let j = 0; j < grid[0].length; j += 1){
+            let size = isIsland(i,j,visited,grid)
+                if( size > 0 && size < minSize){
+                    minSize = size
+                  }
+             }
+        }
+      return minSize;
+  };
+  
+  const isIsland = (i,j,visited,grid) => {
+       let pos = i +','+ j
+       rowInbound = 0 <= i && i < grid.length
+       colInbound = 0 <= j && j < grid[0].length 
+       if(!rowInbound || !colInbound) return 0
+       if(grid[i][j] === 'W') return 0
+       if(visited.has(pos)) return 0
+       visited.add(pos)
+    
+       let currentsize = 1;
+       currentsize += isIsland(i+1,j,visited,grid)
+       currentsize += isIsland(i,j+1,visited,grid)
+       currentsize += isIsland(i-1,j,visited,grid)
+       currentsize += isIsland(i,j-1,visited,grid)
+       
+      return currentsize
+  }
+  
+  
