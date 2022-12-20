@@ -64,3 +64,42 @@ const prereqs = [
 semestersRequired(numCourses, prereqs); // -> 2
 
 */
+
+const semestersRequired = (numCourses, prereqs) => {
+  // todo
+    let graph = makeGraph(numCourses,prereqs)
+    let distance = {}
+    for(let node in graph){
+       if(graph[node].length === 0) distance[node] === 1
+    }
+    
+    for(let course in graph){
+         traverseDistance(graph,course,distance)
+    }
+    return Math.max(...Object.values(distance))
+};
+
+const traverseDistance = (graph,node,distance) =>{
+      if(node in distance) return distance[node];
+      let maxDistance = 0
+      for(let neighbor of graph[node]){
+           let neighborDistance = traverseDistance(graph,neighbor,distance)
+           if(neighborDistance > maxDistance) maxDistance = neighborDistance
+      }
+  
+      distance[node] = 1 + maxDistance
+      return distance[node]
+}
+
+const makeGraph = (numCourses,prereqs) => {
+    let graph = {}
+    for(let i = 0; i < numCourses ; i ++){
+           graph[i] = []
+    }
+  
+   for(let prereq of prereqs){
+         let [a,b] = prereq
+         graph[a].push(b)
+   }
+   return graph
+}
