@@ -31,3 +31,28 @@ test_08:
 
 befittingBrackets('{[(}])'); // -> false
 */
+
+const befittingBrackets = (str) => {
+    // todo
+      let stack = [];
+      let bracketObj = {
+           "(":")",
+           "[":"]",
+           "{":"}",
+      }
+      let strArr = str.split('')
+      for(let i = 0 ; i < strArr.length; i ++){
+            let el = str[i]
+            if(el in bracketObj){
+                 stack.push(bracketObj[el]);
+            }else{
+                if(stack[stack.length - 1] === el){
+                     stack.pop()
+                }else{
+                    return false
+                }
+            }
+      }
+    
+      return stack.length === 0
+  };
