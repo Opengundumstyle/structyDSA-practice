@@ -1,7 +1,12 @@
 /*
-Write a function, semestersRequired, that takes in a number of courses (n) and a list of prerequisites as arguments. Courses have ids ranging from 0 through n - 1. A single prerequisite of [A, B] means that course A must be taken before course B. Return the minimum number of semesters required to complete all n courses. There is no limit on how many courses you can take in a single semester, as long the prerequisites of a course are satisfied before taking it.
+Write a function, semestersRequired, that takes in a number of courses (n) and a list
+ of prerequisites as arguments. Courses have ids ranging from 0 through n - 1. A 
+ single prerequisite of [A, B] means that course A must be taken before course B. 
+ Return the minimum number of semesters required to complete all n courses. There is 
+ no limit on how many courses you can take in a single semester, as long the prerequisites of a course are satisfied before taking it.
 
-Note that given prerequisite [A, B], you cannot take course A and course B concurrently in the same semester. You must take A in some semester before B.
+Note that given prerequisite [A, B], you cannot take course A and course B concurrently in the same semester. You must take A in 
+some semester before B.
 
 You can assume that it is possible to eventually complete all courses.
 
@@ -65,41 +70,53 @@ semestersRequired(numCourses, prereqs); // -> 2
 
 */
 
-const semestersRequired = (numCourses, prereqs) => {
+/*
+Write a function, pairedParentheses, that takes in a string as an argument. The function should return a boolean indicating whether or 
+not the string has well-formed parentheses.
+
+You may assume the string contains only alphabetic characters, '(', or ')'.
+
+test_00:
+
+pairedParentheses("(david)((abby))"); // -> true
+test_01:
+
+pairedParentheses("()rose(jeff"); // -> false
+test_02:
+
+pairedParentheses(")("); // -> false
+test_03:
+
+pairedParentheses("()"); // -> true
+test_04:
+
+pairedParentheses("(((potato())))"); // -> true
+test_05:
+
+pairedParentheses("(())(water)()"); // -> true
+test_06:
+
+pairedParentheses("(())(water()()"); // -> false
+test_07:
+
+pairedParentheses(""); // -> true
+test_08:
+
+pairedParentheses("))()"); // -> false
+*/
+
+const pairedParentheses = (str) => {
   // todo
-    let graph = makeGraph(numCourses,prereqs)
-    let distance = {}
-    for(let node in graph){
-       if(graph[node].length === 0) distance[node] === 1
-    }
-    
-    for(let course in graph){
-         traverseDistance(graph,course,distance)
-    }
-    return Math.max(...Object.values(distance))
+     let count = 0;
+     let arrStr = str.split("")
+     for(let el of arrStr){
+          if(el === "("){
+              count += 1
+          }
+          if(el === ")"){
+              if(count === 0) return false
+               count -= 1
+          }
+     }
+     return count === 0
 };
-
-const traverseDistance = (graph,node,distance) =>{
-      if(node in distance) return distance[node];
-      let maxDistance = 0
-      for(let neighbor of graph[node]){
-           let neighborDistance = traverseDistance(graph,neighbor,distance)
-           if(neighborDistance > maxDistance) maxDistance = neighborDistance
-      }
-  
-      distance[node] = 1 + maxDistance
-      return distance[node]
-}
-
-const makeGraph = (numCourses,prereqs) => {
-    let graph = {}
-    for(let i = 0; i < numCourses ; i ++){
-           graph[i] = []
-    }
-  
-   for(let prereq of prereqs){
-         let [a,b] = prereq
-         graph[a].push(b)
-   }
-   return graph
-}
