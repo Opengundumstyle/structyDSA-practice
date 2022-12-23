@@ -79,7 +79,7 @@ const a = new Node(5);
 // 5
 linkedPalindrome(a); // true
 test_06:
-
+//
 linkedPalindrome(null); // true
 */
 
