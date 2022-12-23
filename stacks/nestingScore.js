@@ -35,3 +35,21 @@ test_07:
 nestingScore("[[[[[[[][]]]]]]][]"); // -> 129
 */
 
+const nestingScore = (str) => {
+    // todo
+      let stack = [0];
+      for(let char of str){
+           if(char === '['){
+               stack.push(0)
+           }else{
+               let popped = stack.pop()
+               let top = stack[stack.length - 1]
+               if(popped > 0){
+                    stack[stack.length - 1] = top + popped * 2
+               }else{
+                   stack[stack.length - 1] = top + 1
+               }
+           }
+      }
+        return stack.pop()
+  };
