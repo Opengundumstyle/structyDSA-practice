@@ -83,3 +83,30 @@ test_06:
 linkedPalindrome(null); // true
 */
 
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.next = null;
+//   }
+// }
+
+const linkedPalindrome = (head) => {
+    // todo
+     let originArr = [];
+     let current = head;
+     while(current!== null){
+         originArr.push(current.val)
+         current = current.next
+     }
+      
+      return reverseString(originArr) === originArr.join('')
+    
+  };
+  
+  const reverseString = (arr)=>{
+      let finalStr =''
+      for(let i = arr.length -1 ; i >=0; i--){
+              finalStr += arr[i]
+      }
+     return finalStr
+  }
