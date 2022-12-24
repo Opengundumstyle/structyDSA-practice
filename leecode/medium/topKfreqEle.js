@@ -16,9 +16,11 @@ var topKFrequent = function(nums, k) {
     let bucket = {}
     let hash = {}
     let finalArr = []
-  for(let i = nums.length ; i > 0 ; i--){
+    let count = k
+  for(let i = nums.length; i > 0 ; i--){
        bucket[i] = []
   }
+  console.log(bucket)
   
   for(let el of nums){
            if(hash[el]){
@@ -32,15 +34,21 @@ var topKFrequent = function(nums, k) {
         let count = hash[key]
         bucket[count].push(key)
   }
+  let newbucket = Object.values(bucket).reverse();
+  console.log(newbucket)
 
-  for(let key in bucket){
-         if(bucket[key].length !== 0 ){
-                k -= 1
-                finalArr.push(...bucket[key])
-                if(k === 0) break
-         }
+  for(let el of newbucket){
+         if(el.length !== 0 ){
+                count -= 1
+                finalArr.push(...el)
+                if(count === 0) break
+          }
   }
-
- return finalArr
+ 
+ return finalArr.slice(0,k)
 
 };
+
+let nums = [1,1,1,2,2,3], k = 2
+console.log(topKFrequent(nums,k))
+// Output: [1,2]
