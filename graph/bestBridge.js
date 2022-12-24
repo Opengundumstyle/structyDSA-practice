@@ -75,3 +75,4 @@ const grid = [
   ["W", "W", "W", "W", "W", "W", "W", "L"],
 ];
 bestBridge(grid); // -> 8*/
+
