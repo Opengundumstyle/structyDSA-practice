@@ -26,20 +26,47 @@ You are not allowed to solve the problem using any serialize methods (such as ev
 
  
 
-Example 1:
+// neetcode solution
 
-Input: dummy_input = ["Hello","World"]
-Output: ["Hello","World"]
-Explanation:
-Machine 1:
-Codec encoder = new Codec();
-String msg = encoder.encode(strs);
-Machine 1 ---msg---> Machine 2
+/**
+ * String - Delimiter
+ * Time O(N) | Space O(1)
+ * https://leetcode.com/problems/encode-and-decode-strings/
+ * @param {string[]} strs
+ * @return {string}
+ */
+ var encode = (strs) => {
+    return strs
+        .map((str) => `${str.length}#${str}`)/* Time O(N) | Ignore Auxillary Space O(N) */
+        .join('');                           /* Time O(N) | Ignore Auxillary Space O(N) */
+}
 
-Machine 2:
-Codec decoder = new Codec();
-String[] strs = decoder.decode(msg);
-Example 2:
+/**
+ * String - Delimiter
+ * Time O(N * K) | Space O(N)
+ * https://leetcode.com/problems/encode-and-decode-strings/
+ * @param {string} str
+ * @return {string[]}
+ */
+var decode = (str, index = 0, decodedWords = []) => {
+    while (index < str.length) {/* Time O(N) */
+        const { nextIndex, word } = delimitWord(str, index);/* Time O(K) | Ignore Auxillary Space Space (K) */
 
-Input: dummy_input = [""]
-Output: [""]*/ 
+        decodedWords.push(word);                            /*           | Ignore Auxillary Space O(N * K ) */
+        index = nextIndex;
+    }
+
+    return decodedWords;
+}
+
+const delimitWord = (str, index) => {
+    const delimiter = str.indexOf('#', index);                             /* Time O(K) */
+    const length = Number(str.slice(index, delimiter));                    /* Time O(K) */
+    const [ start, end ] = [ (delimiter + 1), ((delimiter + length) + 1) ];
+    const word = str.slice(start, end);                                    /* Time O(K) | Ignore Auxillary Space O(K) */
+
+    return {
+      nextIndex: end,
+      word
+    };
+}
