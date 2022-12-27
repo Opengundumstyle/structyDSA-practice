@@ -86,5 +86,4 @@ const middleValue = (head) => {
          let mid = (linkArr.length - 1)/2 
             return linkArr[mid]
       }
-     
   };
