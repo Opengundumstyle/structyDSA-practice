@@ -18,22 +18,46 @@ Output: 9
  
  */
 
-var longestConsecutive = function(nums) {
-    let newSet = new Set(nums)
-    let maxlength = 0;
-    for(let num of nums){
-        if(!(newSet.has(num - 1))){
-             let currentCount = 1
-              while(newSet.has(num)){
-                      if(currentCount > maxlength){
-                           maxlength = currentCount
-                      }
-                     currentCount += 1
-                     num += 1
-              }
-        } 
-    }
+// var longestConsecutive = function(nums) {
+//     let newSet = new Set(nums)
+//     let maxlength = 0;
+//     for(let num of nums){
+//         if(!(newSet.has(num - 1))){
+//              let currentCount = 1
+//               while(newSet.has(num)){
+//                       if(currentCount > maxlength){
+//                            maxlength = currentCount
+//                       }
+//                      currentCount += 1
+//                      num += 1
+//               }
+//         } 
+//     }
    
-   return maxlength 
+//    return maxlength 
 
-};
+// };
+
+// neetcode solution
+
+var longestConsecutive = (nums, maxScore = 0) => {
+    const numSet = new Set(nums);         /* Time O(N) | Space O(N) */
+
+    for (const num of [ ...numSet ]) {    /* Time O(N) */
+        const prevNum = num - 1;
+
+        if (numSet.has(prevNum)) continue;/* Time O(N) */
+
+        let [ currNum, score ] = [ num, 1 ];
+
+        const isStreak = () => numSet.has(currNum + 1)
+        while (isStreak()) {              /* Time O(N) */
+            currNum++;
+            score++;
+        }
+
+        maxScore = Math.max(maxScore, score);
+    }
+
+    return maxScore;
+}
