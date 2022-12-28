@@ -20,19 +20,20 @@ Output: 9
 
 var longestConsecutive = function(nums) {
     let newSet = new Set(nums)
-    let maxlength = - Infinity;
+    let maxlength = 0;
     for(let num of nums){
         if(!(newSet.has(num - 1))){
              let currentCount = 1
-              while(newSet.has(num + 1)){
+              while(newSet.has(num)){
                       if(currentCount > maxlength){
                            maxlength = currentCount
                       }
+                     currentCount += 1
                      num += 1
               }
         } 
     }
    
-   return maxlength
+   return maxlength 
 
 };
