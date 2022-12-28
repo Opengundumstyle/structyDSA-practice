@@ -5,7 +5,6 @@ You may assume that each input would have exactly one solution, and you may not 
 
 You can return the answer in any order.
 
- 
 
 Example 1:
 
@@ -36,5 +35,5 @@ var twoSum = function(nums, target) {
             matchObj[target - num] = i
         }
     }
-  
 };
+
