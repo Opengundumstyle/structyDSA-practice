@@ -32,21 +32,32 @@ Explanation: The only possible triplet sums up to 0.
 
 var threeSum = function(nums) {
     let newNums = nums.slice().sort((a,b)=> a-b)
+     console.log(newNums)
     let finalArr = []
     for(let i = 0 ; i < newNums.length - 2; i++){
           let left = i + 1
           let right = newNums.length - 1
           let current = newNums[i]
-          while(left < right){
+          console.log(current,left,right)
+          while(left <right){
+                 let sum = current + newNums[left] + newNums[right]
                   if(newNums[left] === newNums[left - 1]){
                        left += 1
                   }
-                  if(current + newNums[left] + newNums[right] === 0){
+                  if(sum === 0){
                        finalArr.push([current,newNums[left],newNums[right]])
+                       left += 1
+                       right -= 1
+                  }else if(sum < 0){
+                        left += 1
+                  }else{
+                      right -=1 
                   }
-                    left += 1
-                    right -= 1
+                    
              }
     } 
     return finalArr
 };
+
+let nums = [-1,0,1,2,-1,-4];
+console.log(threeSum(nums))
