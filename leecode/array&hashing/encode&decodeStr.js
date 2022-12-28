@@ -35,38 +35,100 @@ You are not allowed to solve the problem using any serialize methods (such as ev
  * @param {string[]} strs
  * @return {string}
  */
- var encode = (strs) => {
-    return strs
-        .map((str) => `${str.length}#${str}`)/* Time O(N) | Ignore Auxillary Space O(N) */
-        .join('');                           /* Time O(N) | Ignore Auxillary Space O(N) */
-}
+//  var encode = (strs) => {
+//     return strs
+//         .map((str) => `${str.length}#${str}`)/* Time O(N) | Ignore Auxillary Space O(N) */
+//         .join('');                           /* Time O(N) | Ignore Auxillary Space O(N) */
+// }
 
 /**
  * String - Delimiter
  * Time O(N * K) | Space O(N)
  * https://leetcode.com/problems/encode-and-decode-strings/
- * @param {string} str
- * @return {string[]}
+//  * @param {string} str
+//  * @return {string[]}
+//  */
+// var decode = (str, index = 0, decodedWords = []) => {
+//     while (index < str.length) {/* Time O(N) */
+//         const { nextIndex, word } = delimitWord(str, index);/* Time O(K) | Ignore Auxillary Space Space (K) */
+
+//         decodedWords.push(word);                            /*           | Ignore Auxillary Space O(N * K ) */
+//         index = nextIndex;
+//     }
+
+//     return decodedWords;
+// }
+
+// const delimitWord = (str, index) => {
+//     const delimiter = str.indexOf('#', index);                             /* Time O(K) */
+//     const length = Number(str.slice(index, delimiter));                    /* Time O(K) */
+//     const [ start, end ] = [ (delimiter + 1), ((delimiter + length) + 1) ];
+//     const word = str.slice(start, end);                                    /* Time O(K) | Ignore Auxillary Space O(K) */
+
+//     return {
+//       nextIndex: end,
+//       word
+//     };
+// }
+
+// my solution 
+
+/**
+ * Encodes a list of strings to a single string.
+ *
+ * @param {string[]} strs
+ * @return {string}
  */
-var decode = (str, index = 0, decodedWords = []) => {
-    while (index < str.length) {/* Time O(N) */
-        const { nextIndex, word } = delimitWord(str, index);/* Time O(K) | Ignore Auxillary Space Space (K) */
+var encode = function(strs) {
+     encodeStr = ''
+     for(let s of strs){
+           let newS = s.length.toString() + '#' + s
+           encodeStr += newS
+     }
+      return encodeStr
+};
 
-        decodedWords.push(word);                            /*           | Ignore Auxillary Space O(N * K ) */
-        index = nextIndex;
-    }
+/**
+* Decodes a single string to a list of strings.
+*
+* @param {string} s
+* @return {string[]}
+*/
+var decode = function(s) {
+    let decodeStr = []
+    let i = 0
+    let j = 0
+    let numStr = ''
+    while(j !== s.length){
+        if(s[i]!== '#'){
+             numStr += s[i]
+             i+=1 
+        }else{
+              let count = Number(numStr)
+              let init = 0
+              let newStr = ''
+              j = i+1
+              while( init < count){
+                   newStr += s[j]
+                   j += 1
+                   init += 1
+               }
+              i = j
+              numStr = ''
+              decodeStr.push(newStr)
+             }
+        }
+        
+   return decodeStr
+};
 
-    return decodedWords;
-}
+/**
+* Your functions will be called as such:
+* decode(encode(strs));
+*/
 
-const delimitWord = (str, index) => {
-    const delimiter = str.indexOf('#', index);                             /* Time O(K) */
-    const length = Number(str.slice(index, delimiter));                    /* Time O(K) */
-    const [ start, end ] = [ (delimiter + 1), ((delimiter + length) + 1) ];
-    const word = str.slice(start, end);                                    /* Time O(K) | Ignore Auxillary Space O(K) */
 
-    return {
-      nextIndex: end,
-      word
-    };
-}
+let arr = ["Hello","World"]
+let encoded = encode(arr)
+console.log(encoded)
+console.log(decode(encoded))
