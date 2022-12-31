@@ -31,7 +31,7 @@ var maxProfit = function(prices) {//[7,1,5,3,6,4]
          let profit = prices[sell] - prices[buy]
           if(profit < 0) buy = sell
           if( profit > maxProfit)  maxProfit = profit
-           sell += 1 
+          sell += 1 
    }
    return maxProfit
 }
