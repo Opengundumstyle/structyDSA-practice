@@ -87,12 +87,9 @@ var characterReplacement = function(s, k) {
         console.log(hash)
         let valArr = Object.values(hash)
         let currentMax = Math.max(...valArr)
-         console.log(valArr)
-         console.log(currentMax)
         valArr.forEach(item => sum += item)
         let difference = sum  - currentMax
         if(difference <= k ) {
-                console.log('does it hit')
                  if (sum > maxlength) maxlength = sum
         }else{
              while(difference > k){
@@ -101,8 +98,6 @@ var characterReplacement = function(s, k) {
                  hash[key] -= 1
                  left += 1
                  valArr = Object.values(hash)
-                 console.log(hash)
-                 console.log(valArr)
                  currentMax = Math.max(...valArr)
                  valArr.forEach(item => sum += item)
                  difference = sum  - currentMax
