@@ -22,3 +22,26 @@ Input: s = "(]"
 Output: false
  */
 
+
+var isValid = function(s) {
+    let stack = []
+    let paranObj = {
+           '(':')',
+           '{':'}',
+           '[':']',
+    }
+    for(let el of s){
+            if(el in paranObj){
+                  stack.push(paranObj[el])
+            }else{
+                  if(el === stack[stack.length - 1]){ 
+                       stack.pop()
+                        }else{
+                            return false
+                       }
+               }
+    }
+
+      return stack.length === 0
+
+};
