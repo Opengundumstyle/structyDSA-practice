@@ -24,7 +24,6 @@ var search = function(nums, target) {
 
     while(left <= right){
           let mid = Math.floor((left + right)/2)
-          
           if(nums[mid] === target) return mid
           if(target < mid){
                right = mid - 1
