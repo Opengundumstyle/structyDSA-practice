@@ -36,6 +36,4 @@ var twoSum = function(numbers, target) {
           if(sum > target) right--
           if(sum <target) left ++
     }
-    
-    
 };
