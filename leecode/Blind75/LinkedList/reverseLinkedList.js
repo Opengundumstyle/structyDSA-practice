@@ -2,8 +2,6 @@
 
 // You must do this by modifying the input array in-place with O(1) extra memory.
 
- 
-
 // Example 1:
 
 // Input: s = ["h","e","l","l","o"]
@@ -14,7 +12,6 @@
 // Output: ["h","a","n","n","a","H"]
 
 var reverseList = function(head) {
-       
     let current = head
     let prev = null
       while(current !== null){
