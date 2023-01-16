@@ -22,12 +22,29 @@
 # compress('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'); 
 # # -> '127y'
 
+# def compress(s):
+#    s += '!'
+#    result = ''
+#    i = 0
+#    j = 0
+#    while j < len(s): 
+#      if s[i] == s[j]:
+#         j += 1
+#      else:
+#         count = j - i
+#         if count == 1:
+#             result += s[i]
+#         else:
+#             result += str(count) + s[i]
+      
+#         i = j
+        
+#    return result 
 
-
-
+# most optimal 
 def compress(s):
    s += '!'
-   result = ''
+   result = []
    i = 0
    j = 0
    while j < len(s): 
@@ -36,10 +53,10 @@ def compress(s):
      else:
         count = j - i
         if count == 1:
-            result += s[i]
+            result.append(s[i])
         else:
-            result += str(count) + s[i]
+            result.append(str(count) + s[i])
       
         i = j
         
-   return result 
+   return ''.join(result)
