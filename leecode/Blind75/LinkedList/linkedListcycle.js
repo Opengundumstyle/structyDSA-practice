@@ -36,5 +36,6 @@ while(current !== null){
        set.add(current)
        current = current.next
  }
-   return false
+    return false
 };
+
