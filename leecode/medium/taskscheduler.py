@@ -49,4 +49,5 @@ class Solution:
 
              if q and q[0][1] == time:
                   heapq.heappush(maxHeap,q.popleft()[0])
+                  
        return time
