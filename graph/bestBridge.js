@@ -34,9 +34,6 @@ const bestBridge = (grid) => {
           }
         }
       }
-  
-     
-    
 };
 
 const isInbound = (r,c,grid) =>{
@@ -54,7 +51,6 @@ const traverseIsland = (grid,r,c,visited)=>{
         traverseIsland(grid,r+1,c,visited)
         traverseIsland(grid,r,c-1,visited)
         traverseIsland(grid,r,c+1,visited)
-  
        return visited;
 }
 
