@@ -37,7 +37,6 @@ var kthSmallest = function(root, k) {
         while(current){ 
                stack.push(current)
                current = current.left
-              
         }
          current = stack.pop()
          n += 1
