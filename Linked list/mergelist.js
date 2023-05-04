@@ -103,4 +103,39 @@ class Node {
      
   };
   
-  
+  // my solution 
+  const mergeLists2 = (head1, head2) => {
+    // todo
+    let head,tail
+    let current1 = head1
+    let current2 = head2
+    
+    if(current1.val < current2.val) {
+          head = head1
+          tail = head
+          current1 = head.next
+          current2 = head2
+    }else{
+          head = head2
+          tail = head
+          current2 = head.next
+          current1 = head1
+    }
+    
+    
+     while(current1 !== null && current2 !== null){
+             if(current1.val > current2.val){
+                   tail.next = current2
+                   current2 = current2.next
+             }else{
+                   tail.next = current1
+                   current1 = current1.next
+             }
+             tail = tail.next
+     }
+    
+             if (current1 !== null) tail.next = current1;
+             if (current2 !== null) tail.next = current2;
+             
+             return head
+  };
