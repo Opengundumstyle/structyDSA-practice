@@ -37,66 +37,91 @@
 // At least one seat is empty.
 // At least one seat is occupied.
 
-var maxDistToClosest = function(seats) {
+// var maxDistToClosest = function(seats) {
     
-    let frontMax = getFrontMax(seats)
-    let endMax = getEndMax(seats)
+//     let frontMax = getFrontMax(seats)
+//     let endMax = getEndMax(seats)
      
-    let leftBound = frontMax.left
-    let rightBound = endMax.right
+//     let leftBound = frontMax.left
+//     let rightBound = endMax.right
     
-    let start = leftBound
-    let end = start + 1
-    let max = 0
+//     let start = leftBound
+//     let end = start + 1
+//     let max = 0
     
-    while(end <= rightBound){
-           if(seats[end] === 1){
-                let current = end - start 
-                if(max < current) max = current
-                start = end
-                end += 1
-           }else{
-              end += 1
-           }
-       }
+//     while(end <= rightBound){
+//            if(seats[end] === 1){
+//                 let current = end - start 
+//                 if(max < current) max = current
+//                 start = end
+//                 end += 1
+//            }else{
+//               end += 1
+//            }
+//        }
    
 
    
-       if(max % 2 !== 0){
-            max = Math.floor(max/2)
-       }else{
-            max = max/2
-       }
+//        if(max % 2 !== 0){
+//             max = Math.floor(max/2)
+//        }else{
+//             max = max/2
+//        }
    
     
-       max = Math.max(frontMax.max, endMax.max,max)
+//        max = Math.max(frontMax.max, endMax.max,max)
        
      
    
-       return max
+//        return max
    
+// };
+
+// const getFrontMax =(arr)=>{
+//      let max = 0;
+//      let i = 0
+//      while(arr[i] !== 1 && i < arr.length){
+//             max += 1
+//             i += 1
+//       }
+   
+//       return {max,left:i}
+// }
+
+
+// const getEndMax =(arr)=>{
+//      let max = 0;
+//      let i = arr.length - 1
+//      while(arr[i] !== 1 && i >= 0){
+//             max += 1
+//             i -= 1
+//       }
+   
+//       return {max,right:i} 
+   
+// } 
+
+
+// best run time 
+const VACANT   = 0;
+const OCCUPIED = 1;
+
+var maxDistToClosest = function(seats) {
+    
+    let leftGap = seats.indexOf(OCCUPIED);
+    let rightGap = seats.length - seats.lastIndexOf(OCCUPIED) - 1;
+
+    let maxMiddleGap = 0;
+    let gapCounter = 0;
+
+    for (let i = leftGap + 1; i <= seats.length - rightGap; i++) {
+        if (seats[i] === OCCUPIED) {
+            maxMiddleGap = Math.max(maxMiddleGap, gapCounter);
+            gapCounter = 0;
+        } else {
+            gapCounter++;
+        }
+    }
+
+    return Math.max(leftGap, Math.ceil(maxMiddleGap / 2), rightGap);
 };
-
-const getFrontMax =(arr)=>{
-     let max = 0;
-     let i = 0
-     while(arr[i] !== 1 && i < arr.length){
-            max += 1
-            i += 1
-      }
-   
-      return {max,left:i}
-}
-
-
-const getEndMax =(arr)=>{
-     let max = 0;
-     let i = arr.length - 1
-     while(arr[i] !== 1 && i >= 0){
-            max += 1
-            i -= 1
-      }
-   
-      return {max,right:i} 
-   
-} 
