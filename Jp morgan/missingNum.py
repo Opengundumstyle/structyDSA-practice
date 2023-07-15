@@ -60,3 +60,20 @@ class Solution(object):
             missing ^= i ^ num
         
         return missing
+
+# alternative approach
+class Solution(object):
+    def missingNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        arrSum = 0
+        missSum = 0
+        for i in range(0,len(nums)+1):
+            arrSum += i
+        
+        for el in nums:
+            missSum += el
+        
+        return arrSum - missSum
