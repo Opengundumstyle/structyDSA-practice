@@ -12,3 +12,13 @@
 # pair_product([3, 2, 5, 4, 1], 10) # -> (1, 2)
 # pair_product([4, 6, 8, 2], 16) # -> (2, 3)
 
+def pair_product(numbers, target_product):
+    hash = {}
+    for index,el in enumerate(numbers):
+        key = target_product / el
+        if key in hash:
+            return (hash[key],index)
+        else:
+           hash[el] = index
+   
+        
