@@ -64,14 +64,18 @@
 # max_path_sum(grid) # -> 82
 
 
+
 def max_path_sum(grid):
     r,c = 0,0
-    return _max_path_sum(grid,r,c)
+    return _max_path_sum(grid,r,c,{})
 
 
-def _max_path_sum(grid,r,c):
+def _max_path_sum(grid,r,c,memo):
   
-    maxVal = float("-inf")
+    
+    key  = str(r) +','+ str(c)
+    if key in memo:
+        return memo[key]
      
     if c == len(grid[0]) - 1 and r == len(grid) - 1:
         return grid[r][c]
@@ -79,9 +83,9 @@ def _max_path_sum(grid,r,c):
     if c == len(grid[0]) or r == len(grid):
         return 0
     
-    rightSum = _max_path_sum(grid,r+1,c)
-    downSum = _max_path_sum(grid,r,c+1)
+    rightSum = _max_path_sum(grid,r+1,c,memo)
+    downSum = _max_path_sum(grid,r,c+1,memo)
     
-    maxVal = max(rightSum,downSum) + grid[r][c]
+    memo[key] = max(rightSum,downSum) + grid[r][c]
     
-    return maxVal
+    return memo[key]
