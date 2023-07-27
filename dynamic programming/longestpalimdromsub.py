@@ -34,31 +34,23 @@
 
 
 
+def max_palin_subsequence(string):
+    return _max_palin_subsequence(string,0,len(string)-1)
+    
 
-
-class Solution:
-    def longestPalindrome(self, s: str) -> str:
-         res = ''
-         resLen = 0
-         for i in range(0,len(s)):
-             # odd string
-             left,right = i,i
-             while left >= 0 and right < len(s) and s[left] == s[right]:
-                  currLen = right - left + 1
-                  if currLen > resLen:
-                       resLen = currLen
-                       res = s[left:right+1]
-                  left -=1
-                  right += 1
-          
-                   
-             left,right = i,i+1
-             while left >= 0 and right < len(s) and s[left] == s[right]:
-                   currLen = right - left + 1
-                   if currLen > resLen:
-                         resLen = currLen
-                         res = s[left:right+1]
-                   left -=1
-                   right += 1
-
-         return res
+def _max_palin_subsequence(string,i,j):
+  
+    if i == j:
+       return 1
+    
+    if i > j:
+       return 0
+    
+    if string[i] == string[j]:
+       return 2 + _max_palin_subsequence(string,i+1,j-1)
+    else:
+      return max(
+         _max_palin_subsequence(string,i + 1,j),
+         _max_palin_subsequence(string,i,j - 1)
+        )
+      
