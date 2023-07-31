@@ -13,6 +13,18 @@
 
 
 def quickest_concat(s, words):
+     if _quickest_concat(s, words,{}) == float("inf"):
+         return -1
+     return _quickest_concat(s, words,{})
+
+
+def _quickest_concat(s, words,memo):
+  
+
+  
+  if s in memo:
+     return memo[s]
+  
   if s == "":
      return 0
     
@@ -20,7 +32,8 @@ def quickest_concat(s, words):
   for word in words:
      if s.startswith(word):
           suffix = s[len(word):]
-          attempt = 1 + quickest_concat(suffix,words)
+          attempt = 1 + _quickest_concat(suffix,words,memo)
           min_words = min(attempt,min_words)
-          
+  
+  memo[s] = min_words
   return min_words
