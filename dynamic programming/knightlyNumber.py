@@ -20,3 +20,40 @@
 # knightly_number(20, 6, 18, 7, 10, 15) # -> 60
 # knightly_number(20, 12, 8, 3, 9, 14) # -> 98410127
 # knightly_number(8, 2, 0, 0, 1, 1) # -> 0
+
+def knightly_number(n, m, kr, kc, pr, pc):
+      return _knightly_number(n, m, kr, kc, pr, pc,{})
+ 
+
+def _knightly_number(n, m, kr, kc, pr, pc,memo):
+      key = (m,kr,kc)
+      if key in memo:
+          return memo[key]
+        
+      if m == 0:
+         if kr == pr and kc == pc:
+            return 1
+         else:
+            return 0
+           
+      if kr >=n or kr < 0 or kc >=n or kc < 0:
+         return 0
+        
+      neighbor_pos = [
+          (kr+2,kc+1),
+          (kr+2,kc-1),
+          (kr-2,kc+1),
+          (kr-2,kc-1),
+          (kr+1,kc+2),
+          (kr+1,kc-2), 
+          (kr-1,kc+2),
+          (kr-1,kc-2),
+      ]
+      
+      count = 0
+      for neighbor in neighbor_pos:
+          row,col = neighbor
+          count += _knightly_number(n,m-1,row,col,pr,pc,memo)
+      memo[key] = count
+      
+      return count
